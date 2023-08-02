@@ -9,7 +9,7 @@ const getUsers = async (req: Request, res: Response) => {
     const users = await getResult();
     res.send({ users });
   } catch (e) {
-    console.log(`Error: ${e}`); // Error: Something went wrong
+    console.log(`Error  : ${e}`); // Error: Something went wrong
     res.send({ message: "Ha ocurrido un problema." });
   }
 };
