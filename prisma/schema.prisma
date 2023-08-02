@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Areas {
+  id          Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(255)
+  description String?   @db.VarChar(255)
+  updated_at  DateTime? @default(now()) @db.DateTime(0)
+  roles     ROLES_AREAS[]
+}
+
+model ROLES_AREAS {
+  role_id    Int
+  Roles      Roles     @relation(fields: [role_id], references: [id])
+  area_id    Int
+  Areas      Areas     @relation(fields: [area_id], references: [id])
+  updated_at DateTime? @default(now()) @db.DateTime(0)
+
+  @@id([role_id, area_id])
+  @@index([area_id], map: "fk_area")
+  @@index([role_id], map: "fk_role")
+}
+
+model Roles {
+  id          Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(255)
+  description String?   @db.VarChar(255)
+  updated_at  DateTime? @default(now()) @db.DateTime(0)
+  areas      ROLES_AREAS[]  
+}
+
+model Users {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique(map: "email") @db.VarChar(255)
+  user_name  String    @unique(map: "user_name") @db.VarChar(255)
+  password   String    @db.VarChar(255)
+  role_id    Int
+  updated_at DateTime? @default(now()) @db.DateTime(0)
+  is_active  Boolean?  @default(true)
+
+  @@index([role_id], map: "fk_role")
+}
