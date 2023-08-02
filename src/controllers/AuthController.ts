@@ -5,13 +5,9 @@ import {
 } from "../services/AuthService";
 
 const getUsers = async (req: Request, res: Response) => {
-  try {
-    const users = await getResult();
-    res.send({ users });
-  } catch (e) {
-    console.log(`Error: ${e}`); // Error: Something went wrong
-    res.send({ message: "Ha ocurrido un problema.", error: e });
-  }
+
+    res.send({ message: "Todo ok" });
+
 };
 
 const saveUser = async (req: Request, res: Response) => {
