@@ -7,5 +7,4 @@ router.get("/", getAreas);
 router.post("/", saveArea);
 router.put("/", updateArea)
 router.delete("/",deleteArea);
-
 export {router};

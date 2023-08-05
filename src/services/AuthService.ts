@@ -22,10 +22,10 @@ const saveUser = async (user: any) => {
   return newUser;
 };
 
-const updateUser = async (id: number, user: any) => {
+const updateUser = async (user: any) => {
   const updatedUser = await prisma.users.update({
     where: {
-      id: id,
+      id: user.id,
     },
     data: user,
   });
@@ -41,4 +41,4 @@ const deleteUser = async (id:number) => {
   return deletedUser;
 };
 
-export { getUsers, getUserById, saveUser, updateUser};
+export { getUsers, getUserById, saveUser, updateUser, deleteUser};
