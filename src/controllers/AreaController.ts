@@ -31,9 +31,7 @@ const deleteArea = async (req: Request, res: Response) => {
   try {
     const { area } = req.body; //obtener el id del artícul; //convertir el id a un número
     const deletedArea = await deleteResult(area);
-    res.send({
-      deletedArea,
-    });
+    res.send({deletedArea});
   } catch (e) {
     console.log(`Error: ${e}`);
     res.send({ message: "Ha ocurrido un problema." });
@@ -44,9 +42,7 @@ const updateArea = async (req: Request, res: Response) => {
   try {
     const { area } = req.body; //obtener el id del artículo
     const updatedArea = await updateResult(area);
-    res.send({
-      updatedArea,
-    });
+    res.send({updatedArea});
   } catch (e) {
     console.log(`Error: ${e}`);
     res.send({ message: "Ha ocurrido un problema." });

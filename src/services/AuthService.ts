@@ -2,7 +2,16 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const getUsers = async () => {
-  const users = await prisma.users.findMany();
+  const users = await prisma.users.findMany(
+    //ordenador por updatedAt
+    {
+      orderBy: [
+        {
+          updated_at: "desc",
+        },
+      ],
+    }
+  );
   return users;
 };
 
@@ -26,6 +35,7 @@ const updateUser = async (user: any) => {
   const updatedUser = await prisma.users.update({
     where: {
       id: user.id,
+
     },
     data: user,
   });

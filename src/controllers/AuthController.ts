@@ -42,8 +42,9 @@ const updateUser = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const { user } = req.body;
-    const deleted = await deleteResult(user.id);
-    res.send(deleted);
+   
+    const userDeleted = await deleteResult(user.id);
+    res.send({userDeleted});
   }
   catch (e) {
     console.log(`Error: ${e}`); // Error: Something went wrong

@@ -2,7 +2,13 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const getAreas = async () => {
-  const areas = await prisma.areas.findMany();
+  const areas = await prisma.areas.findMany({
+    orderBy: [
+      {
+        updated_at: "desc",
+      },
+    ],
+  });
   return areas;
 };
 

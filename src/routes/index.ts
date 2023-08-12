@@ -5,6 +5,12 @@ import { readdirSync } from "fs";
 const PATH_ROUTER = `${__dirname}`;
 const router = Router();
 
+router.get("/", (req, res) => {
+    res.send("<h1>API REST - Expediente Electronico 2023</h1>");
+  });
+  
+  
+
 /**
  *
  * @returns
