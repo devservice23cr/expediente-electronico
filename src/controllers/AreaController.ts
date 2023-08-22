@@ -5,14 +5,17 @@ import {
   deleteArea as deleteResult,
   updateArea as updateResult,
 } from "../services/AreaService";
+import {
+  handleSuccessResponse,
+  handleHttpError,
+} from "../utils/HandleResponses";
 
 const getAreas = async (req: Request, res: Response) => {
   try {
     const areas = await getResult();
-    res.send({ areas });
+    handleSuccessResponse(res, { areas });
   } catch (e) {
-    console.log(`Error: ${e}`);
-    res.send({ message: "Ha ocurrido un problema." });
+    handleHttpError(res, e);
   }
 };
 
@@ -20,10 +23,10 @@ const saveArea = async (req: Request, res: Response) => {
   try {
     const { area } = req.body;
     const newArea = await saveResult(area);
-    res.send({ newArea });
+
+    handleSuccessResponse(res, { newArea });
   } catch (e) {
-    console.log(`Error: ${e}`);
-    res.send({ message: "Ha ocurrido un problema." });
+    handleHttpError(res, e);
   }
 };
 
@@ -31,21 +34,21 @@ const deleteArea = async (req: Request, res: Response) => {
   try {
     const { area } = req.body; //obtener el id del artícul; //convertir el id a un número
     const deletedArea = await deleteResult(area);
-    res.send({deletedArea});
+
+    handleSuccessResponse(res, { deletedArea });
   } catch (e) {
-    console.log(`Error: ${e}`);
-    res.send({ message: "Ha ocurrido un problema." });
+    handleHttpError(res, e);
   }
 };
 
 const updateArea = async (req: Request, res: Response) => {
   try {
-    const { area } = req.body; //obtener el id del artículo
+    const { area } = req.body; 
     const updatedArea = await updateResult(area);
-    res.send({updatedArea});
+
+    handleSuccessResponse(res, { updatedArea });
   } catch (e) {
-    console.log(`Error: ${e}`);
-    res.send({ message: "Ha ocurrido un problema." });
+    handleHttpError(res, e);
   }
 };
 
